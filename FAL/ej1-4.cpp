@@ -1,0 +1,77 @@
+
+/*@ <authors>
+ *
+ * Daniel Barroso Casado
+ *
+ * Usuario del juez: F07
+ *
+ *@ </authors>
+
+#include <iostream>
+#include <vector>
+#include <fstream>
+
+using namespace std;
+
+
+/*@ <answer>
+
+ Escribe aquí un comentario general sobre la solución, explicando cómo
+ se resuelve el problema y cuál es el coste de la solución, en función
+ del tamaño del problema.
+
+ @ </answer>
+
+
+ // ================================================================
+ // Escribe el código completo de tu solución aquí debajo
+ // ================================================================
+ //@ <answer>
+
+void resuelveCaso() {
+
+    int N;
+
+    cin >> N;
+
+
+    vector<int> v(N);
+    int pairs = 0;
+    int impares = 0;
+    
+
+    for (int i = 0; i < N; i++) {
+        int next;
+        cin >> next;
+        v[i] = next;
+        if (next % 2 != 0) impares++;
+        if (next % 2 == 0) pairs += impares;
+        
+    }
+
+    cout << pairs << "\n";
+
+}
+
+//@ </answer>
+//  Lo que se escriba dejado de esta línea ya no forma parte de la solución.
+
+int main() {
+    // ajustes para que cin extraiga directamente de un fichero
+#ifndef DOMJUDGE
+    std::ifstream in("ej1-4.txt");
+    auto cinbuf = std::cin.rdbuf(in.rdbuf());
+#endif
+
+    int numCasos;
+    std::cin >> numCasos;
+    for (int i = 0; i < numCasos; ++i)
+        resuelveCaso();
+
+    // para dejar todo como estaba al principio
+#ifndef DOMJUDGE
+    std::cin.rdbuf(cinbuf);
+    system("PAUSE");
+#endif
+    return 0;
+}*/
