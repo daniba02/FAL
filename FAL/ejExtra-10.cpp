@@ -10,9 +10,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include <climits>
 using namespace std;
-
 
 
 /*@ <answer>
@@ -29,58 +27,51 @@ using namespace std;
  // ================================================================
  //@ <answer>
 
+int resolver(vector<int> const& v, const int ini, const int fin, const int g, const int n) {
 
-//P: {0 < n <= v.size()}
-
-//fun resolver(v[], p): dev bool b
-
-//Q: {b = Para todo i, j: 0 <= i <= p < j < n: v[i] < v[j]}
-
-bool resolver(vector<int> const& v, const int p) {
-
-    bool resolver = true;
-    int k = 0;
-    int max = v[0];
-
-    while (resolver && k < v.size()) {
-
-        if (k <= p && max < v[k]) {
-
-            max = v[k];
-        }
-        else if (k > p) {
-            if (max > v[k]) {
-                resolver = false;
-            }
-        }
-
-        k++;
+    if (ini == fin) {
+        return fin;
     }
+    else {
 
-    return resolver;
+        int m = (fin + ini) / 2;
+
+        if (v[m] > g * (n - m)) {
+            return resolver(v, m + 1, fin, g, n);
+        }
+        else return resolver(v, ini, m, g, n);
+
+    }
 }
 
 
 
 void resuelveCaso() {
 
-    // leer los datos de la entrada
+    int m, g;
 
-    int n, p;
+    cin >> m >> g;
 
-    cin >> n >> p;
+    vector<int> v(m);
 
-    vector<int> v(n);
-
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < m; i++)
     {
         cin >> v[i];
     }
 
+    int dia = resolver(v, 0, v.size() - 1, g, v.size());
 
-    bool b = resolver(v, p);
+    if (v.size() == 1 && v[0] < g) {
 
-    if (b ? cout << "SI\n" : cout << "NO\n");
+        cout << 0;
+    }
+    else {
+
+        if (dia == v.size() - 1 ? cout << "SIN RACIONAMIENTO" : cout << dia);
+    }
+    cout << "\n";
+
+    // leer los datos de la entrada
 
     // resolver el caso posiblemente llamando a otras funciones
 
@@ -93,7 +84,7 @@ void resuelveCaso() {
 int main() {
     // ajustes para que cin extraiga directamente de un fichero
 #ifndef DOMJUDGE
-    std::ifstream in("ej1-2.txt");
+    std::ifstream in("ejExtra-10.txt");
     auto cinbuf = std::cin.rdbuf(in.rdbuf());
 #endif
 
@@ -108,5 +99,4 @@ int main() {
     system("PAUSE");
 #endif
     return 0;
-}
-*/
+}*/

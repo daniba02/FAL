@@ -10,9 +10,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include <climits>
 using namespace std;
-
 
 
 /*@ <answer>
@@ -30,45 +28,41 @@ using namespace std;
  //@ <answer>
 
 
-//P: {0 < n <= v.size()}
+int equilibrio(vector<int> const& v) {
 
-//fun resolver(v[], p): dev bool b
+    int n = v.size();
+    int p = -1;
 
-//Q: {b = Para todo i, j: 0 <= i <= p < j < n: v[i] < v[j]}
+    int numUnos = 0;
+    int numCeros = 0;
+    bool terminado = false;
+    int i = 0;
 
-bool resolver(vector<int> const& v, const int p) {
-
-    bool resolver = true;
-    int k = 0;
-    int max = v[0];
-
-    while (resolver && k < v.size()) {
-
-        if (k <= p && max < v[k]) {
-
-            max = v[k];
+    while (i < n)
+    {
+        if (v[i] == 1) {
+            numUnos++;
         }
-        else if (k > p) {
-            if (max > v[k]) {
-                resolver = false;
-            }
+        else if (v[i] == 0) {
+            numCeros++;
         }
 
-        k++;
+        if (numUnos == numCeros) {
+            terminado = true;
+            p = i;
+        }
+        
+        i++;
     }
 
-    return resolver;
+    return p;
 }
-
-
-
 void resuelveCaso() {
 
     // leer los datos de la entrada
 
-    int n, p;
-
-    cin >> n >> p;
+    int n;
+    cin >> n;
 
     vector<int> v(n);
 
@@ -77,10 +71,7 @@ void resuelveCaso() {
         cin >> v[i];
     }
 
-
-    bool b = resolver(v, p);
-
-    if (b ? cout << "SI\n" : cout << "NO\n");
+    cout << equilibrio(v) << "\n";
 
     // resolver el caso posiblemente llamando a otras funciones
 
@@ -93,7 +84,7 @@ void resuelveCaso() {
 int main() {
     // ajustes para que cin extraiga directamente de un fichero
 #ifndef DOMJUDGE
-    std::ifstream in("ej1-2.txt");
+    std::ifstream in("ejExtra-03.txt");
     auto cinbuf = std::cin.rdbuf(in.rdbuf());
 #endif
 
@@ -108,5 +99,4 @@ int main() {
     system("PAUSE");
 #endif
     return 0;
-}
-*/
+}*/

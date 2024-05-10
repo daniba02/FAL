@@ -10,16 +10,16 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include <climits>
 using namespace std;
-
 
 
 /*@ <answer>
 
- Escribe aquí un comentario general sobre la solución, explicando cómo
- se resuelve el problema y cuál es el coste de la solución, en función
- del tamaño del problema.
+ P: { 0 <= n <= 1000}
+
+ pistaMasLarga (v[], int n) dev int mx
+
+ Q: {mx = max i,j : 0 <= i < j < n : Para todo k : i <= k < j : v[k] >= v[k + 1] : j - i + 1}
 
  @ </answer>
 
@@ -29,46 +29,39 @@ using namespace std;
  // ================================================================
  //@ <answer>
 
+int pistaMasLarga(vector<int> const& v, const int n) {
 
-//P: {0 < n <= v.size()}
+    int p = 0;
+    int mx = 0;
+    int ant = 4000;
 
-//fun resolver(v[], p): dev bool b
+    for (int i = 0; i < n; i++)
+    {
 
-//Q: {b = Para todo i, j: 0 <= i <= p < j < n: v[i] < v[j]}
+        if (v[i] <= ant) {
 
-bool resolver(vector<int> const& v, const int p) {
-
-    bool resolver = true;
-    int k = 0;
-    int max = v[0];
-
-    while (resolver && k < v.size()) {
-
-        if (k <= p && max < v[k]) {
-
-            max = v[k];
-        }
-        else if (k > p) {
-            if (max > v[k]) {
-                resolver = false;
+            p += 1;
+            if (p > mx) {
+                mx = p;
             }
         }
-
-        k++;
+        else {
+            
+            p = 1;
+        }
+        ant = v[i];
     }
 
-    return resolver;
+    return mx;
 }
-
 
 
 void resuelveCaso() {
 
     // leer los datos de la entrada
 
-    int n, p;
-
-    cin >> n >> p;
+    int n;
+    cin >> n;
 
     vector<int> v(n);
 
@@ -77,11 +70,7 @@ void resuelveCaso() {
         cin >> v[i];
     }
 
-
-    bool b = resolver(v, p);
-
-    if (b ? cout << "SI\n" : cout << "NO\n");
-
+    cout << pistaMasLarga(v, v.size()) << "\n";
     // resolver el caso posiblemente llamando a otras funciones
 
     // escribir la solución
@@ -93,7 +82,7 @@ void resuelveCaso() {
 int main() {
     // ajustes para que cin extraiga directamente de un fichero
 #ifndef DOMJUDGE
-    std::ifstream in("ej1-2.txt");
+    std::ifstream in("ejExtra-04.txt");
     auto cinbuf = std::cin.rdbuf(in.rdbuf());
 #endif
 
@@ -108,5 +97,4 @@ int main() {
     system("PAUSE");
 #endif
     return 0;
-}
-*/
+}*/

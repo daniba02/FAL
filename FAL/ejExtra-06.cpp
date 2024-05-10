@@ -10,16 +10,23 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include <climits>
 using namespace std;
-
 
 
 /*@ <answer>
 
- Escribe aquí un comentario general sobre la solución, explicando cómo
- se resuelve el problema y cuál es el coste de la solución, en función
- del tamaño del problema.
+
+ P: {0 <= p < q <= long(v)}
+
+ todosConsecutivos(v, p, q) dev bool p
+
+ Q: { p = Para todo k : p <= k < q : v[k] - 1 = v[k + 1] || v[k] + 1 = v[k + 1]}
+
+ P: {0 <= n <= long(v)}
+
+ numSegmentosConsecutivos (v[], n) dev int a
+
+ Q: {a = #p,q : 0 <= p < q + 1 < n : todosConsecutivos(v, p, q)}
 
  @ </answer>
 
@@ -29,46 +36,36 @@ using namespace std;
  // ================================================================
  //@ <answer>
 
+int numSegmentosConsecutivos(vector<int> const& v, const int n) {
 
-//P: {0 < n <= v.size()}
+    int a = 0;
+    int cont = 0;
 
-//fun resolver(v[], p): dev bool b
-
-//Q: {b = Para todo i, j: 0 <= i <= p < j < n: v[i] < v[j]}
-
-bool resolver(vector<int> const& v, const int p) {
-
-    bool resolver = true;
     int k = 0;
-    int max = v[0];
 
-    while (resolver && k < v.size()) {
 
-        if (k <= p && max < v[k]) {
+    while (k < n - 1) {
 
-            max = v[k];
+        if (v[k] + 1 == v[k + 1] || v[k] - 1 == v[k + 1]) {
+            a++;
+            cont += a;
         }
-        else if (k > p) {
-            if (max > v[k]) {
-                resolver = false;
-            }
+        else {
+            a = 0;
         }
 
         k++;
     }
 
-    return resolver;
+
+    return cont;
 }
-
-
-
 void resuelveCaso() {
 
     // leer los datos de la entrada
 
-    int n, p;
-
-    cin >> n >> p;
+    int n;
+    cin >> n;
 
     vector<int> v(n);
 
@@ -77,10 +74,7 @@ void resuelveCaso() {
         cin >> v[i];
     }
 
-
-    bool b = resolver(v, p);
-
-    if (b ? cout << "SI\n" : cout << "NO\n");
+    cout << numSegmentosConsecutivos(v, v.size()) << "\n";
 
     // resolver el caso posiblemente llamando a otras funciones
 
@@ -93,7 +87,7 @@ void resuelveCaso() {
 int main() {
     // ajustes para que cin extraiga directamente de un fichero
 #ifndef DOMJUDGE
-    std::ifstream in("ej1-2.txt");
+    std::ifstream in("ejExtra-06.txt");
     auto cinbuf = std::cin.rdbuf(in.rdbuf());
 #endif
 
@@ -108,5 +102,4 @@ int main() {
     system("PAUSE");
 #endif
     return 0;
-}
-*/
+}*/

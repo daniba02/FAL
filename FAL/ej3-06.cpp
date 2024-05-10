@@ -1,4 +1,4 @@
-
+/*
 /*@ <authors>
  *
  * Daniel Barroso Casado
@@ -10,9 +10,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include <climits>
 using namespace std;
-
 
 
 /*@ <answer>
@@ -29,62 +27,36 @@ using namespace std;
  // ================================================================
  //@ <answer>
 
+int resolver(const long long int n) {
 
-//P: {0 < n <= v.size()}
-
-//fun resolver(v[], p): dev bool b
-
-//Q: {b = Para todo i, j: 0 <= i <= p < j < n: v[i] < v[j]}
-
-bool resolver(vector<int> const& v, const int p) {
-
-    bool resolver = true;
-    int k = 0;
-    int max = v[0];
-
-    while (resolver && k < v.size()) {
-
-        if (k <= p && max < v[k]) {
-
-            max = v[k];
-        }
-        else if (k > p) {
-            if (max > v[k]) {
-                resolver = false;
-            }
-        }
-
-        k++;
+    if (n < 10) {
+        if (n != 1) return 1;
+        else return 0;
     }
+    else {
 
-    return resolver;
+
+
+    }
 }
 
-
-
-void resuelveCaso() {
+bool resuelveCaso() {
 
     // leer los datos de la entrada
 
-    int n, p;
+    long long int n;
+    cin >> n;
 
-    cin >> n >> p;
+    if (!std::cin)  // fin de la entrada
+        return false;
 
-    vector<int> v(n);
-
-    for (int i = 0; i < n; i++)
-    {
-        cin >> v[i];
-    }
-
-
-    bool b = resolver(v, p);
-
-    if (b ? cout << "SI\n" : cout << "NO\n");
+    long long int sol = resolver();
 
     // resolver el caso posiblemente llamando a otras funciones
 
     // escribir la solución
+
+    return true;
 }
 
 //@ </answer>
@@ -93,14 +65,11 @@ void resuelveCaso() {
 int main() {
     // ajustes para que cin extraiga directamente de un fichero
 #ifndef DOMJUDGE
-    std::ifstream in("ej1-2.txt");
+    std::ifstream in("casos.txt");
     auto cinbuf = std::cin.rdbuf(in.rdbuf());
 #endif
 
-    int numCasos;
-    std::cin >> numCasos;
-    for (int i = 0; i < numCasos; ++i)
-        resuelveCaso();
+    while (resuelveCaso());
 
     // para dejar todo como estaba al principio
 #ifndef DOMJUDGE
@@ -108,5 +77,4 @@ int main() {
     system("PAUSE");
 #endif
     return 0;
-}
-*/
+}*/

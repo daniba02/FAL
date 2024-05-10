@@ -5,7 +5,7 @@
  *
  * Usuario del juez: F07
  *
- *@ </authors>*/
+ *@ </authors>
 
 #include <iostream>
 #include <fstream>
@@ -26,7 +26,7 @@ using namespace std;
  // ================================================================
  // Escribe el código completo de tu solución aquí debajo
  // ================================================================
- //@ <answer>*/
+ //@ <answer>
 
 struct Sol {
     vector<pair<string, int>> bajos;
@@ -124,4 +124,4 @@ int main() {
     system("PAUSE");
 #endif
     return 0;
-}
+}*/

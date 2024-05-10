@@ -10,16 +10,24 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include <climits>
 using namespace std;
-
 
 
 /*@ <answer>
 
- Escribe aquí un comentario general sobre la solución, explicando cómo
- se resuelve el problema y cuál es el coste de la solución, en función
- del tamaño del problema.
+ P: {0 <= p < q < long(v)}
+
+ todosPares(v, p, q) dev bool q
+
+ Q: {q = Para todo k : q <= k < p : v[k] % 2 = 0}
+
+
+ P: {0 <= n <= long(v)}
+
+ numSegPares (v[], n) dev int p
+
+ Q: { p = #p,q : 0 <= p < q < n : todosPares(v, p, q)}
+
 
  @ </answer>
 
@@ -30,46 +38,36 @@ using namespace std;
  //@ <answer>
 
 
-//P: {0 < n <= v.size()}
 
-//fun resolver(v[], p): dev bool b
+// I: {0 <= p < n ^ 0 <= i <= n}
 
-//Q: {b = Para todo i, j: 0 <= i <= p < j < n: v[i] < v[j]}
+int numSegPares(vector<int> const& v, const int n) {
 
-bool resolver(vector<int> const& v, const int p) {
+    int cont = 0;
+    int p = 0;
 
-    bool resolver = true;
-    int k = 0;
-    int max = v[0];
+    for (int i = 0; i < n; i++)
+    {
 
-    while (resolver && k < v.size()) {
-
-        if (k <= p && max < v[k]) {
-
-            max = v[k];
+        if (v[i] % 2 == 0) {
+            p++;
+            cont += p;
         }
-        else if (k > p) {
-            if (max > v[k]) {
-                resolver = false;
-            }
+        else if (v[i] % 2 != 0) {
+            p = 0;
         }
-
-        k++;
     }
-
-    return resolver;
+    
+    return cont;
 }
-
-
 
 void resuelveCaso() {
 
     // leer los datos de la entrada
 
-    int n, p;
-
-    cin >> n >> p;
-
+    int n;
+    cin >> n;
+    
     vector<int> v(n);
 
     for (int i = 0; i < n; i++)
@@ -77,10 +75,8 @@ void resuelveCaso() {
         cin >> v[i];
     }
 
+    cout << numSegPares(v, n) << "\n";
 
-    bool b = resolver(v, p);
-
-    if (b ? cout << "SI\n" : cout << "NO\n");
 
     // resolver el caso posiblemente llamando a otras funciones
 
@@ -93,7 +89,7 @@ void resuelveCaso() {
 int main() {
     // ajustes para que cin extraiga directamente de un fichero
 #ifndef DOMJUDGE
-    std::ifstream in("ej1-2.txt");
+    std::ifstream in("ejExtra-05.txt");
     auto cinbuf = std::cin.rdbuf(in.rdbuf());
 #endif
 
@@ -108,5 +104,4 @@ int main() {
     system("PAUSE");
 #endif
     return 0;
-}
-*/
+}*/

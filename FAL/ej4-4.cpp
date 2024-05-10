@@ -5,14 +5,12 @@
  *
  * Usuario del juez: F07
  *
- *@ </authors>*/
+ *@ </authors>
 
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include <climits>
 using namespace std;
-
 
 
 /*@ <answer>
@@ -29,62 +27,52 @@ using namespace std;
  // ================================================================
  //@ <answer>
 
+int resolver(vector<int> const& v, int ini, int fin, vector<int>& sol, int& max) {
 
-//P: {0 < n <= v.size()}
+    if (ini == fin) {
+        sol[v[ini]]++;
 
-//fun resolver(v[], p): dev bool b
-
-//Q: {b = Para todo i, j: 0 <= i <= p < j < n: v[i] < v[j]}
-
-bool resolver(vector<int> const& v, const int p) {
-
-    bool resolver = true;
-    int k = 0;
-    int max = v[0];
-
-    while (resolver && k < v.size()) {
-
-        if (k <= p && max < v[k]) {
-
-            max = v[k];
+        if (sol[v[ini]] > max){
+            max = sol[v[ini]];
         }
-        else if (k > p) {
-            if (max > v[k]) {
-                resolver = false;
-            }
-        }
-
-        k++;
+        return max;
     }
+    else {
 
-    return resolver;
+        int medio = (ini + fin) / 2;
+
+        resolver(v, ini, medio, sol, max);
+        resolver(v, medio + 1, fin, sol, max);
+
+        return max;
+    }
 }
 
-
-
-void resuelveCaso() {
+bool resuelveCaso() {
 
     // leer los datos de la entrada
+    int n;
+    cin >> n;
+    if (n == 0)
+        return false;
 
-    int n, p;
+    if (n > 0) {
 
-    cin >> n >> p;
-
-    vector<int> v(n);
-
-    for (int i = 0; i < n; i++)
-    {
-        cin >> v[i];
+        vector<int> v(n);
+        for (int i = 0; i < n; i++) {
+            cin >> v[i];
+        }
+        vector<int> sol(100000);
+        int max = 0;
+        resolver(v, 0, n - 1, sol, max);
+        cout << max << "\n";
     }
-
-
-    bool b = resolver(v, p);
-
-    if (b ? cout << "SI\n" : cout << "NO\n");
 
     // resolver el caso posiblemente llamando a otras funciones
 
     // escribir la solución
+
+    return true;
 }
 
 //@ </answer>
@@ -93,14 +81,11 @@ void resuelveCaso() {
 int main() {
     // ajustes para que cin extraiga directamente de un fichero
 #ifndef DOMJUDGE
-    std::ifstream in("ej1-2.txt");
+    std::ifstream in("ej4-4.txt");
     auto cinbuf = std::cin.rdbuf(in.rdbuf());
 #endif
 
-    int numCasos;
-    std::cin >> numCasos;
-    for (int i = 0; i < numCasos; ++i)
-        resuelveCaso();
+    while (resuelveCaso());
 
     // para dejar todo como estaba al principio
 #ifndef DOMJUDGE

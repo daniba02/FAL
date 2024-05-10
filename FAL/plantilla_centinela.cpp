@@ -9,10 +9,9 @@
 
 #include <iostream>
 #include <fstream>
-#include <...>
+#include <vector>
 using namespace std;
 
-#include "..."  // propios o los de las estructuras de datos de clase
 
 /*@ <answer>
 
